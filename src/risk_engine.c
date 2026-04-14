@@ -10,27 +10,30 @@ struct RiskEngine{
 
 RiskEngine* re_engine_create(const EngineConfig* config){
 	RiskEngine* engine = malloc(sizeof(RiskEngine));
-	engine->profile_count =0;
-	memset(engine->profile, 0 ,sizeof(engine->profiles));
 	if(engine == NULL){
-		return NULL;
-	}
+                return NULL;
+        }
 	engine->config = *config;
+	engine->profile_count =0;
+	memset(engine->profiles, 0 ,sizeof(engine->profiles));
 	return engine;
 }
 void  re_engine_destroy(RiskEngine* engine){
 	free(engine);
 }
 static UserProfile* find_or_create_profile(RiskEngine* engine, uint64_t user_id){
-	while(engine->profiles){
-		if(profile.user_id == user_id){
-			return *user_id; 
+	for(uint32_t i = 0; i < engine->profile_count; i++){
+		if(engine->profiles[i].user_id == user_id){
+			return &engine->profiles[i];
 		}
 	}
-	if(profile.count <1024){
-		// i dont know what to do here
+	if(engine->profile_count < 1024){
+		UserProfile* p = &engine->profiles[engine->profile_count];
+		p->user_id = user_id; 
+		engine->profile_count++; 
+		return p; 
 	}
-	// dont know the step3 either
+	return NULL;
 }
 RiskDecision re_evaluate_login(RiskEngine* engine,const LoginEvent*event){
 	UserProfile* profile = find_or_create_profile(engine , event->user_id);
