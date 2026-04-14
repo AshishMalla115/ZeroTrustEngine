@@ -26,7 +26,7 @@ int profile_bloom_check(const UserProfile* profile, uint64_t hash) {
     if (!bloom_get_bit(profile->bloom_filter, i1) ||
         !bloom_get_bit(profile->bloom_filter, i2) ||
         !bloom_get_bit(profile->bloom_filter, i3)) {
-        return 0;
+         return 0;
     }
     return 1;
 }
@@ -46,9 +46,7 @@ void profile_update_login(UserProfile* profile, const LoginEvent* event) {
     profile_bloom_add(profile, (uint64_t)event->geo_hash);
 }
 
-int profile_serialize(const UserProfile* profile,
-                      uint8_t* buf, uint32_t buf_size,
-                      uint32_t* written) {
+int profile_serialize(const UserProfile* profile,uint8_t* buf, uint32_t buf_size,uint32_t* written) {
     if (buf_size < sizeof(UserProfile)) {
         return -1;
     }
@@ -57,8 +55,7 @@ int profile_serialize(const UserProfile* profile,
     return 0;
 }
 
-int profile_deserialize(UserProfile* profile,
-                        const uint8_t* buf, uint32_t buf_size) {
+int profile_deserialize(UserProfile* profile, const uint8_t* buf, uint32_t buf_size) {
     if (buf_size < sizeof(UserProfile)) {
         return -1;
     }
