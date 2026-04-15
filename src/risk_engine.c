@@ -1,5 +1,6 @@
 #include "risk_engine.h"
 #include "scoring.h"
+#include "profile.h"
 #include <stdlib.h>
 #include <string.h>
 struct RiskEngine{
