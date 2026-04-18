@@ -7,6 +7,8 @@ struct RiskEngine{
 	EngineConfig config;
 	UserProfile profiles[1024];
 	uint32_t profile_count;
+	SessionBuffer sessions[16]; 
+	int64_t session_count;
 };
 
 RiskEngine* re_engine_create(const EngineConfig* config){
