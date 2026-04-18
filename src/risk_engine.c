@@ -1,14 +1,15 @@
 #include "risk_engine.h"
 #include "scoring.h"
 #include "profile.h"
+#include "session.h"
 #include <stdlib.h>
 #include <string.h>
 struct RiskEngine{
 	EngineConfig config;
 	UserProfile profiles[1024];
 	uint32_t profile_count;
-	SessionBuffer sessions[16]; 
-	int64_t session_count;
+	SessionBuffer sessions[1024]; 
+	uint64_t session_count;
 };
 
 RiskEngine* re_engine_create(const EngineConfig* config){
