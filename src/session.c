@@ -3,8 +3,6 @@
 void session_buffer_init(SessionBuffer* buf, uint64_t session_id){
 	memset(buf, 0 , sizeof(SessionBuffer)); 
 	buf->session_id = session->id;
-	buf->count = 0; 
-	buf->head = 0;
 }
 
 void session_buffer_push(SessionBuffer* buff, const SessionEvent *event){
