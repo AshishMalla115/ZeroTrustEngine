@@ -1,4 +1,8 @@
+#ifndef SESSION_H
+#define SESSION_H
+
 #include "risk_engine.h"
+
 #define	SESSION_BUFFER_SIZE 16
 
 typedef struct{
@@ -14,4 +18,4 @@ void session_buffer_init(SessionBuffer* buf, uint64_t session_id);
 void session_buffer_push(SessionBuffer* buf,const SessionEvent* event);
 float session_compute_velocity(const SessionBuffer* buf,float current_score,int64_t current_time);
 
-
+#endif
