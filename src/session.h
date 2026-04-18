@@ -1,4 +1,5 @@
-#DEFINE	SERSSION_BUFFER_SIZE 16
+#include "risk_engine.h"
+#define	SESSION_BUFFER_SIZE 16
 
 typedef struct{
 	SessionEvent events[SESSION_BUFFER_SIZE];
@@ -6,7 +7,7 @@ typedef struct{
 	uint32_t count;
 	uint64_t session_id;
 	float last_score;
-	uint64_t last_event_time;
+	int64_t last_event_time;
 }SessionBuffer;
 
 void session_buffer_init(SessionBuffer* buf, uint64_t session_id); 
