@@ -22,6 +22,12 @@ RiskEngine* re_engine_create(const EngineConfig* config){
 void  re_engine_destroy(RiskEngine* engine){
 	free(engine);
 }
+
+void re_engine_tick(RiskEngine* engine){
+	for(uint32_t i = 0; i < engine->profile_count; i++){
+		engine->profiles[i].current_risk_score *= (1.0f - engine->config.decay_rate);
+	}
+}
 static UserProfile* find_or_create_profile(RiskEngine* engine, uint64_t user_id){
 	for(uint32_t i = 0; i < engine->profile_count; i++){
 		if(engine->profiles[i].user_id == user_id){
