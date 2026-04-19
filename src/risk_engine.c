@@ -46,20 +46,32 @@ static UserProfile* find_or_create_profile(RiskEngine* engine, uint64_t user_id)
 	return NULL;
 }
 
-static SessionBuffer* find_or_create_session(RiskEngine* engine, uint64_t session_id){
+static SessionBuffer* find_or_create_session(RiskEngine* engine, uint32_t session_id){
+	engine->session_count = 0; 
+	memset(engine->sessions,0,sizeof(engine->sessions));
 	for(uint32_t i = 0; i < engine->session_count; i++){
 		if(engine->sessions[i].session_id == session_id){
 			return &engine->sessions[i];
 		}
 	}
 	if(engine->session_count < 1024){
-		SessionBuffer* s = &engine->sessions[engine->session_count]; 
+		SessionBuffer* s = &engine->sessions[engine->session_count];
+	       	session_buffer_init(s,session_id);	
 		s->session_id = session_id; 
 		engine->session_count++;
 		return s;
 	}
 	return NULL;
 }
+
+RiskDecision re_evaluate_event(RiskEngine* engine,const SessionEvent*event){
+	SessionBuffer* session = find_or_create_session(engine,event->session_id); 
+	session_buffer_init(session,session_id);
+       	float velocity_score = session_compute_velocity();
+	//am stuck at this point here, I do understand the logic we are doing but not what we push and pass	
+
+}
+
 RiskDecision re_evaluate_login(RiskEngine* engine,const LoginEvent*event){
 	UserProfile* profile = find_or_create_profile(engine , event->user_id);
 	int known_device = 0; 
