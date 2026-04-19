@@ -3,7 +3,7 @@ project(ZeroTrustEngine C)
 
 set(CMAKE_C_STANDARD 11)
 
-include_directories(include)
+include_directories(include src)
 
 add_library(riskscore SHARED
 	src/risk_engine.c
