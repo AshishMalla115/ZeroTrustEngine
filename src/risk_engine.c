@@ -9,7 +9,7 @@ struct RiskEngine{
 	UserProfile profiles[1024];
 	uint32_t profile_count;
 	SessionBuffer sessions[1024]; 
-	uint64_t session_count;
+	uint32_t session_count;
 };
 
 RiskEngine* re_engine_create(const EngineConfig* config){
@@ -20,6 +20,8 @@ RiskEngine* re_engine_create(const EngineConfig* config){
 	engine->config = *config;
 	engine->profile_count =0;
 	memset(engine->profiles, 0 ,sizeof(engine->profiles));
+	engine->session_count = 0; 
+	memset(engine->session,0,sizeof(engine->sessions));
 	return engine;
 }
 void  re_engine_destroy(RiskEngine* engine){
@@ -46,9 +48,7 @@ static UserProfile* find_or_create_profile(RiskEngine* engine, uint64_t user_id)
 	return NULL;
 }
 
-static SessionBuffer* find_or_create_session(RiskEngine* engine, uint32_t session_id){
-	engine->session_count = 0; 
-	memset(engine->sessions,0,sizeof(engine->sessions));
+static SessionBuffer* find_or_create_session(RiskEngine* engine, uint64_t session_id){
 	for(uint32_t i = 0; i < engine->session_count; i++){
 		if(engine->sessions[i].session_id == session_id){
 			return &engine->sessions[i];
@@ -57,7 +57,6 @@ static SessionBuffer* find_or_create_session(RiskEngine* engine, uint32_t sessio
 	if(engine->session_count < 1024){
 		SessionBuffer* s = &engine->sessions[engine->session_count];
 	       	session_buffer_init(s,session_id);	
-		s->session_id = session_id; 
 		engine->session_count++;
 		return s;
 	}
@@ -65,11 +64,31 @@ static SessionBuffer* find_or_create_session(RiskEngine* engine, uint32_t sessio
 }
 
 RiskDecision re_evaluate_event(RiskEngine* engine,const SessionEvent*event){
-	SessionBuffer* session = find_or_create_session(engine,event->session_id); 
-	session_buffer_init(session,session_id);
-       	float velocity_score = session_compute_velocity();
-	//am stuck at this point here, I do understand the logic we are doing but not what we push and pass	
+	SessionBuffer* session = find_or_create_session(engine,event->session_id);
+       	UserProfile* profile = find_or_create_profile(engine, event->user_id); 
+	session_buffer_push(session, event);
+       	float velocity = session_compute_velocity(session, profile->current_risk_score, event->timestamp_unix); 
+	float base_score = score_event_type(event->event_type); 
+	float final_score = base_score+((velocity*0.3f)+(velocity*0.0f)+(velocity*1.0f));
+	profile->current_risk_score = final_score;
+       	if(final_score < 0.3f){
+                risk = LOW;
+        }else if(final_score < 0.6f){
+                risk = MEDIUM;
+        }else if(final_score < 0.8f){
+                risk = HIGH;
+        }else{
+                risk = CRITICAL;
+        }
 
+	 RiskDecision result;
+       	 result.decision = decision;
+       	 result.risk_level = risk;
+       	 result.score = score;
+       	 result.rule_score = score;
+      	 result.ml_score = 0.0f;
+      	 result.reason_code = 0;
+      	 return result;	
 }
 
 RiskDecision re_evaluate_login(RiskEngine* engine,const LoginEvent*event){
