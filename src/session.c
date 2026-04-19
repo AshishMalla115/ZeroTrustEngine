@@ -2,13 +2,13 @@
 #include <string.h>
 void session_buffer_init(SessionBuffer* buf, uint64_t session_id){
 	memset(buf, 0 , sizeof(SessionBuffer)); 
-	buf->session_id = session->id;
+	buf->session_id = session_id;
 }
 
-void session_buffer_push(SessionBuffer* buff, const SessionEvent *event){
-	buf->events[buf->head] = *event
+void session_buffer_push(SessionBuffer* buf, const SessionEvent *event){
+	buf->events[buf->head] = *event;
 	buf->head = (buf->head +1)% SESSION_BUFFER_SIZE;
-	if(buf->count < SESSION_BUFFER_COUNT){
+	if(buf->count < SESSION_BUFFER_SIZE){
 		buf->count++;
 	}
 	buf->last_event_time = event->timestamp_unix;
@@ -18,7 +18,7 @@ float session_compute_velocity(const SessionBuffer* buf, float current_score,int
 		return 0.0f;
 	}
 	int64_t elapsed_seconds = current_time - buf->last_event_time;
-	if(elapsed <=0){
+	if(elapsed_seconds <=0){
 		return 0.0f;
 	}
 	float velocity = (current_score - buf->last_score)/(float)elapsed_seconds;
