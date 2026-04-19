@@ -21,7 +21,7 @@ RiskEngine* re_engine_create(const EngineConfig* config){
 	engine->profile_count =0;
 	memset(engine->profiles, 0 ,sizeof(engine->profiles));
 	engine->session_count = 0; 
-	memset(engine->session,0,sizeof(engine->sessions));
+	memset(engine->sessions,0,sizeof(engine->sessions));
 	return engine;
 }
 void  re_engine_destroy(RiskEngine* engine){
