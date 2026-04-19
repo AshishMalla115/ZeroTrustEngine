@@ -45,6 +45,21 @@ static UserProfile* find_or_create_profile(RiskEngine* engine, uint64_t user_id)
 	}
 	return NULL;
 }
+
+static SessionBuffer* find_or_create_session(RiskEngine* engine, uint64_t session_id){
+	for(uint32_t i = 0; i < engine->session_count; i++){
+		if(engine->sessions[i].session_id == session_id){
+			return &engine->sessions[i];
+		}
+	}
+	if(engine->session_count < 1024){
+		SessionBuffer* s = &engine->sessions[engine->session_count]; 
+		s->session_id = session_id; 
+		engine->session_count++;
+		return s;
+	}
+	return NULL;
+}
 RiskDecision re_evaluate_login(RiskEngine* engine,const LoginEvent*event){
 	UserProfile* profile = find_or_create_profile(engine , event->user_id);
 	int known_device = 0; 
