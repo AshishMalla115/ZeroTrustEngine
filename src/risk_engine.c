@@ -66,11 +66,32 @@ static SessionBuffer* find_or_create_session(RiskEngine* engine, uint64_t sessio
 RiskDecision re_evaluate_event(RiskEngine* engine,const SessionEvent*event){
 	SessionBuffer* session = find_or_create_session(engine,event->session_id);
        	UserProfile* profile = find_or_create_profile(engine, event->user_id); 
+	if(session == NULL || profile == NULL){
+		RiskDecision err = {0}; 
+		err.decision = BLOCK; 
+		err.risk_level = CRITICAL; 
+		err.score = 1.0f; 
+		return err; 
+	}
 	session_buffer_push(session, event);
+
        	float velocity = session_compute_velocity(session, profile->current_risk_score, event->timestamp_unix); 
 	float base_score = score_event_type(event->event_type); 
-	float final_score = base_score+((velocity*0.3f)+(velocity*0.0f)+(velocity*1.0f));
+	float final_score = base_score+(velocity*0.3f);
+	if(final_score > 1.0f) final_score = 1.0f; 
+	if(final_score < 0.0f) final_score = 0.0f;
 	profile->current_risk_score = final_score;
+
+	DecisionType decision; 
+	if(final_score < engine->config.score_threshold_mfa){
+		decision = ALLOW; 
+	}else if(final_score < engine->config.score_threshold_block){
+		decision = MFA_REQUIRED;
+	}else{
+		decision = BLOCK;
+	}
+
+	RiskLevel risk;
        	if(final_score < 0.3f){
                 risk = LOW;
         }else if(final_score < 0.6f){
@@ -84,8 +105,8 @@ RiskDecision re_evaluate_event(RiskEngine* engine,const SessionEvent*event){
 	 RiskDecision result;
        	 result.decision = decision;
        	 result.risk_level = risk;
-       	 result.score = score;
-       	 result.rule_score = score;
+       	 result.score = final_score;
+       	 result.rule_score = base_score;
       	 result.ml_score = 0.0f;
       	 result.reason_code = 0;
       	 return result;	
