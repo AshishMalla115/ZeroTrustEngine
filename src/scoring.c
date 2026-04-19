@@ -47,3 +47,16 @@ float compute_login_score(const LoginEvent* event, int known_device, int known_l
 	}
 	return sum;	
 }
+
+float score_event_type(EventType type){
+	switch(type){
+		case LOGIN:		return 0.1f;
+		case API_CALL:		return 0.0f;
+		case FILE_DOWNLOAD:	return 0.2f; 
+		case DATA_EXPORT:	return 0.5f;
+		case PASSWORD_CHANGE:	return 0.3f;
+		case ADMIN_ACTION:	return 0.4f;
+		case FAILED_AUTH:	return 0.6f; 
+		default:		return 0.1f;		
+	}
+}
