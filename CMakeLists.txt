@@ -8,6 +8,8 @@ include_directories(include)
 add_library(riskscore SHARED
 	src/risk_engine.c
 	src/scoring.c
+	src/profile.c
+	src/session.c
 )
 
 add_executable(test_engine
