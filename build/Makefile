@@ -48,19 +48,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/cmake/1530/bin/cmake
+CMAKE_COMMAND = /snap/cmake/1544/bin/cmake
 
 # The command to remove a file.
-RM = /snap/cmake/1530/bin/cmake -E rm -f
+RM = /snap/cmake/1544/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/bot1/fypOffical/Zero_Trust_Architecture
+CMAKE_SOURCE_DIR = /home/bot1/fypOfficalTwo/ZeroTrustEngine
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/bot1/fypOffical/Zero_Trust_Architecture/build
+CMAKE_BINARY_DIR = /home/bot1/fypOfficalTwo/ZeroTrustEngine/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	/snap/cmake/1530/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/cmake/1544/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bot1/fypOffical/Zero_Trust_Architecture/build/CMakeFiles /home/bot1/fypOffical/Zero_Trust_Architecture/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bot1/fypOfficalTwo/ZeroTrustEngine/build/CMakeFiles /home/bot1/fypOfficalTwo/ZeroTrustEngine/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bot1/fypOffical/Zero_Trust_Architecture/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bot1/fypOfficalTwo/ZeroTrustEngine/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -142,6 +142,30 @@ test_engine/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_engine.dir/build.make CMakeFiles/test_engine.dir/build
 .PHONY : test_engine/fast
 
+src/profile.o: src/profile.c.o
+.PHONY : src/profile.o
+
+# target to build an object file
+src/profile.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/profile.c.o
+.PHONY : src/profile.c.o
+
+src/profile.i: src/profile.c.i
+.PHONY : src/profile.i
+
+# target to preprocess a source file
+src/profile.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/profile.c.i
+.PHONY : src/profile.c.i
+
+src/profile.s: src/profile.c.s
+.PHONY : src/profile.s
+
+# target to generate assembly for a file
+src/profile.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/profile.c.s
+.PHONY : src/profile.c.s
+
 src/risk_engine.o: src/risk_engine.c.o
 .PHONY : src/risk_engine.o
 
@@ -190,6 +214,54 @@ src/scoring.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/scoring.c.s
 .PHONY : src/scoring.c.s
 
+src/security.o: src/security.c.o
+.PHONY : src/security.o
+
+# target to build an object file
+src/security.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/security.c.o
+.PHONY : src/security.c.o
+
+src/security.i: src/security.c.i
+.PHONY : src/security.i
+
+# target to preprocess a source file
+src/security.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/security.c.i
+.PHONY : src/security.c.i
+
+src/security.s: src/security.c.s
+.PHONY : src/security.s
+
+# target to generate assembly for a file
+src/security.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/security.c.s
+.PHONY : src/security.c.s
+
+src/session.o: src/session.c.o
+.PHONY : src/session.o
+
+# target to build an object file
+src/session.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/session.c.o
+.PHONY : src/session.c.o
+
+src/session.i: src/session.c.i
+.PHONY : src/session.i
+
+# target to preprocess a source file
+src/session.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/session.c.i
+.PHONY : src/session.c.i
+
+src/session.s: src/session.c.s
+.PHONY : src/session.s
+
+# target to generate assembly for a file
+src/session.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/session.c.s
+.PHONY : src/session.c.s
+
 tests/main.o: tests/main.c.o
 .PHONY : tests/main.o
 
@@ -224,12 +296,21 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... riskscore"
 	@echo "... test_engine"
+	@echo "... src/profile.o"
+	@echo "... src/profile.i"
+	@echo "... src/profile.s"
 	@echo "... src/risk_engine.o"
 	@echo "... src/risk_engine.i"
 	@echo "... src/risk_engine.s"
 	@echo "... src/scoring.o"
 	@echo "... src/scoring.i"
 	@echo "... src/scoring.s"
+	@echo "... src/security.o"
+	@echo "... src/security.i"
+	@echo "... src/security.s"
+	@echo "... src/session.o"
+	@echo "... src/session.i"
+	@echo "... src/session.s"
 	@echo "... tests/main.o"
 	@echo "... tests/main.i"
 	@echo "... tests/main.s"

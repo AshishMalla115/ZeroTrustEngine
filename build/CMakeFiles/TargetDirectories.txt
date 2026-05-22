@@ -1,0 +1,4 @@
+/home/bot1/fypOfficalTwo/ZeroTrustEngine/build/CMakeFiles/riskscore.dir
+/home/bot1/fypOfficalTwo/ZeroTrustEngine/build/CMakeFiles/test_engine.dir
+/home/bot1/fypOfficalTwo/ZeroTrustEngine/build/CMakeFiles/edit_cache.dir
+/home/bot1/fypOfficalTwo/ZeroTrustEngine/build/CMakeFiles/rebuild_cache.dir
