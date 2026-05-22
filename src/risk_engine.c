@@ -4,12 +4,14 @@
 #include "session.h"
 #include <stdlib.h>
 #include <string.h>
+#include <pthread.h>
 struct RiskEngine{
 	EngineConfig config;
 	UserProfile profiles[1024];
 	uint32_t profile_count;
 	SessionBuffer sessions[1024]; 
 	uint32_t session_count;
+	pthread_rwlock_t rwlock;
 };
 
 RiskEngine* re_engine_create(const EngineConfig* config){
@@ -17,6 +19,7 @@ RiskEngine* re_engine_create(const EngineConfig* config){
 	if(engine == NULL){
                 return NULL;
         }
+        pthread_rwlock_init(&engine->rwlock,NULL);
 	engine->config = *config;
 	engine->profile_count =0;
 	memset(engine->profiles, 0 ,sizeof(engine->profiles));
@@ -25,13 +28,16 @@ RiskEngine* re_engine_create(const EngineConfig* config){
 	return engine;
 }
 void  re_engine_destroy(RiskEngine* engine){
+	pthread_rwlock_destroy(&engine->rwlock);
 	free(engine);
 }
 
 void re_engine_tick(RiskEngine* engine){
+	pthread_rwlock_wrlock(&engine->rwlock);
 	for(uint32_t i = 0; i < engine->profile_count; i++){
 		engine->profiles[i].current_risk_score *= (1.0f - engine->config.decay_rate);
 	}
+	pthread_rwlock_unlock(&engine->rwlock);
 }
 static UserProfile* find_or_create_profile(RiskEngine* engine, uint64_t user_id){
 	for(uint32_t i = 0; i < engine->profile_count; i++){
@@ -64,9 +70,11 @@ static SessionBuffer* find_or_create_session(RiskEngine* engine, uint64_t sessio
 }
 
 RiskDecision re_evaluate_event(RiskEngine* engine,const SessionEvent*event){
+	pthread_rwlock_wrlock(&engine->rwlock);
 	SessionBuffer* session = find_or_create_session(engine,event->session_id);
        	UserProfile* profile = find_or_create_profile(engine, event->user_id); 
 	if(session == NULL || profile == NULL){
+		pthread_rwlock_unlock(&engine->rwlock);
 		RiskDecision err = {0}; 
 		err.decision = BLOCK; 
 		err.risk_level = CRITICAL; 
@@ -108,10 +116,12 @@ RiskDecision re_evaluate_event(RiskEngine* engine,const SessionEvent*event){
        	 result.rule_score = base_score;
       	 result.ml_score = 0.0f;
       	 result.reason_code = 0;
+	 pthread_rwlock_unlock(&engine->rwlock);
       	 return result;	
 }
 
 RiskDecision re_evaluate_login(RiskEngine* engine,const LoginEvent*event){
+	pthread_rwlock_wrlock(&engine->rwlock);
 	UserProfile* profile = find_or_create_profile(engine , event->user_id);
 	int known_device = 0; 
 	int known_location = 0; 
@@ -151,6 +161,7 @@ RiskDecision re_evaluate_login(RiskEngine* engine,const LoginEvent*event){
 	result.score = score; 
 	result.rule_score = score; 
 	result.ml_score = 0.0f; 
-	result.reason_code = 0; 
+	result.reason_code = 0;
+	pthread_rwlock_unlock(&engine->rwlock);	
 	return result; 
 }
