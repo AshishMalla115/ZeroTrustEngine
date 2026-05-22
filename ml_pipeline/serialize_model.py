@@ -58,14 +58,15 @@ def write_tree(estimator, n_samples: int) -> bytes:
     Writes all nodes of one tree.
     Each node is 24 bytes:
       node_id   uint32  4 bytes
-      left      uint32  4 bytes  (0 if leaf)
-      right     uint32  4 bytes  (0 if leaf)
+      left      uint32  4 bytes  (0xFFFFFFFF if leaf)
+      right     uint32  4 bytes  (0xFFFFFFFF if leaf)
       feature   uint32  4 bytes  (0 if leaf)
       threshold float32 4 bytes
       path_len  float32 4 bytes  ← c(n) expected path length
     """
-    tree   = estimator.tree_
-    buf    = bytearray()
+    tree          = estimator.tree_
+    buf           = bytearray()
+    LEAF_SENTINEL = 0xFFFFFFFF
 
     for i in range(tree.node_count):
         left      = tree.children_left[i]
@@ -79,10 +80,10 @@ def write_tree(estimator, n_samples: int) -> bytes:
         # expected path length for this node
         path_length = c(n_node)
 
-        # clean up sklearn sentinel values
-        left      = 0 if left  == -1 else int(left)
-        right     = 0 if right == -1 else int(right)
-        feat      = 0 if feat  == -2 else int(feat)
+        # 0xFFFFFFFF = UINT32_MAX = sentinel meaning no child (leaf node)
+        left  = LEAF_SENTINEL if left  == -1 else int(left)
+        right = LEAF_SENTINEL if right == -1 else int(right)
+        feat  = 0             if feat  == -2 else int(feat)
 
         buf += struct.pack("<IIIIff",
                            i,           # node_id
