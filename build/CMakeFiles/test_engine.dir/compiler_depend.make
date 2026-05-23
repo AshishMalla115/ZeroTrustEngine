@@ -115,12 +115,15 @@ CMakeFiles/test_engine.dir/tests/main.c.o: /home/bot1/fypOfficalTwo/ZeroTrustEng
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
 test_engine: /lib/x86_64-linux-gnu/libc.so.6 \
+  /lib/x86_64-linux-gnu/libm.so.6 \
+  /lib/x86_64-linux-gnu/libmvec.so.1 \
   /lib64/ld-linux-x86-64.so.2 \
   /usr/lib/x86_64-linux-gnu/Scrt1.o \
   /usr/lib/x86_64-linux-gnu/crti.o \
   /usr/lib/x86_64-linux-gnu/crtn.o \
   /usr/lib/x86_64-linux-gnu/libc.so \
   /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 \
+  /usr/lib/x86_64-linux-gnu/libm.so \
   /usr/lib/gcc/x86_64-linux-gnu/13/crtbeginS.o \
   /usr/lib/gcc/x86_64-linux-gnu/13/crtendS.o \
   /usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a \
@@ -131,11 +134,13 @@ test_engine: /lib/x86_64-linux-gnu/libc.so.6 \
   libriskscore.so
 
 
-libriskscore.so:
-
 /usr/lib/x86_64-linux-gnu/libcrypto.so:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/crtbeginS.o:
+
+libriskscore.so:
+
+/usr/lib/x86_64-linux-gnu/libm.so:
 
 /usr/lib/x86_64-linux-gnu/libgcc_s.so.1:
 
@@ -160,6 +165,8 @@ libriskscore.so:
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/lib/x86_64-linux-gnu/libm.so.6:
 
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
 
@@ -224,6 +231,8 @@ libriskscore.so:
 /usr/include/openssl/core.h:
 
 /usr/include/pthread.h:
+
+/lib/x86_64-linux-gnu/libmvec.so.1:
 
 /usr/include/features.h:
 

@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/riskscore.dir/link.d"
+  "CMakeFiles/riskscore.dir/src/model.c.o"
+  "CMakeFiles/riskscore.dir/src/model.c.o.d"
   "CMakeFiles/riskscore.dir/src/profile.c.o"
   "CMakeFiles/riskscore.dir/src/profile.c.o.d"
   "CMakeFiles/riskscore.dir/src/risk_engine.c.o"

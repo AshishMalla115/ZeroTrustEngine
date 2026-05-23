@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/bot1/fypOfficalTwo/ZeroTrustEngine/src/model.c" "CMakeFiles/riskscore.dir/src/model.c.o" "gcc" "CMakeFiles/riskscore.dir/src/model.c.o.d"
   "/home/bot1/fypOfficalTwo/ZeroTrustEngine/src/profile.c" "CMakeFiles/riskscore.dir/src/profile.c.o" "gcc" "CMakeFiles/riskscore.dir/src/profile.c.o.d"
   "/home/bot1/fypOfficalTwo/ZeroTrustEngine/src/risk_engine.c" "CMakeFiles/riskscore.dir/src/risk_engine.c.o" "gcc" "CMakeFiles/riskscore.dir/src/risk_engine.c.o.d"
   "/home/bot1/fypOfficalTwo/ZeroTrustEngine/src/scoring.c" "CMakeFiles/riskscore.dir/src/scoring.c.o" "gcc" "CMakeFiles/riskscore.dir/src/scoring.c.o.d"

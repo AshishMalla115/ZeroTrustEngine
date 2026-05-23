@@ -142,6 +142,30 @@ test_engine/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_engine.dir/build.make CMakeFiles/test_engine.dir/build
 .PHONY : test_engine/fast
 
+src/model.o: src/model.c.o
+.PHONY : src/model.o
+
+# target to build an object file
+src/model.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/model.c.o
+.PHONY : src/model.c.o
+
+src/model.i: src/model.c.i
+.PHONY : src/model.i
+
+# target to preprocess a source file
+src/model.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/model.c.i
+.PHONY : src/model.c.i
+
+src/model.s: src/model.c.s
+.PHONY : src/model.s
+
+# target to generate assembly for a file
+src/model.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/riskscore.dir/build.make CMakeFiles/riskscore.dir/src/model.c.s
+.PHONY : src/model.c.s
+
 src/profile.o: src/profile.c.o
 .PHONY : src/profile.o
 
@@ -296,6 +320,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... riskscore"
 	@echo "... test_engine"
+	@echo "... src/model.o"
+	@echo "... src/model.i"
+	@echo "... src/model.s"
 	@echo "... src/profile.o"
 	@echo "... src/profile.i"
 	@echo "... src/profile.s"

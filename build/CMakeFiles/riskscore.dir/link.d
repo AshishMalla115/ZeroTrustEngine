@@ -6,7 +6,13 @@ libriskscore.so: \
   CMakeFiles/riskscore.dir/src/profile.c.o \
   CMakeFiles/riskscore.dir/src/session.c.o \
   CMakeFiles/riskscore.dir/src/security.c.o \
+  CMakeFiles/riskscore.dir/src/model.c.o \
   /usr/lib/x86_64-linux-gnu/libcrypto.so \
+  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so \
+  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so \
+  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so \
+  /lib/x86_64-linux-gnu/libm.so.6 \
+  /lib/x86_64-linux-gnu/libmvec.so.1 \
   /usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a \
   /usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so \
   /usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so \
@@ -42,7 +48,19 @@ CMakeFiles/riskscore.dir/src/session.c.o:
 
 CMakeFiles/riskscore.dir/src/security.c.o:
 
+CMakeFiles/riskscore.dir/src/model.c.o:
+
 /usr/lib/x86_64-linux-gnu/libcrypto.so:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so:
+
+/lib/x86_64-linux-gnu/libm.so.6:
+
+/lib/x86_64-linux-gnu/libmvec.so.1:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a:
 
