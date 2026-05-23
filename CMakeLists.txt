@@ -14,6 +14,7 @@ add_library(riskscore SHARED
 	src/profile.c
 	src/session.c
 	src/security.c
+	src/model.c
 )
 
 add_executable(test_engine
@@ -24,4 +25,4 @@ target_link_libraries(riskscore OpenSSL::Crypto)
 target_link_libraries(test_engine riskscore)
 target_link_libraries(test_engine OpenSSL::Crypto)
 target_link_libraries(riskscore Threads::Threads)
-
+target_link_libraries(riskscore m)
