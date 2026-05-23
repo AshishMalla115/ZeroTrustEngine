@@ -2,6 +2,7 @@
 #include "scoring.h"
 #include "profile.h"
 #include "session.h"
+#include "model.h"
 #include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
@@ -11,6 +12,8 @@ struct RiskEngine{
 	uint32_t profile_count;
 	SessionBuffer sessions[1024]; 
 	uint32_t session_count;
+	IsolationForest model; 
+	int model_loaded;
 	pthread_rwlock_t rwlock;
 };
 
@@ -19,6 +22,12 @@ RiskEngine* re_engine_create(const EngineConfig* config){
 	if(engine == NULL){
                 return NULL;
         }
+	engine->model_loaded = 0;
+	if(config->model_path[0] != '\0'){
+		if(model_load(&engine->model, config->model_path) == 0){
+			engine->model_loaded =1;
+		}
+	}
         pthread_rwlock_init(&engine->rwlock,NULL);
 	engine->config = *config;
 	engine->profile_count =0;
@@ -29,6 +38,9 @@ RiskEngine* re_engine_create(const EngineConfig* config){
 }
 void  re_engine_destroy(RiskEngine* engine){
 	pthread_rwlock_destroy(&engine->rwlock);
+	if(engine->model_loaded){
+		model_free(&engine->model);
+	}
 	free(engine);
 }
 
@@ -119,49 +131,56 @@ RiskDecision re_evaluate_event(RiskEngine* engine,const SessionEvent*event){
 	 pthread_rwlock_unlock(&engine->rwlock);
       	 return result;	
 }
+RiskDecision re_evaluate_login(RiskEngine* engine, const LoginEvent* event) {
+    pthread_rwlock_wrlock(&engine->rwlock);
 
-RiskDecision re_evaluate_login(RiskEngine* engine,const LoginEvent*event){
-	pthread_rwlock_wrlock(&engine->rwlock);
-	UserProfile* profile = find_or_create_profile(engine , event->user_id);
-	int known_device = 0; 
-	int known_location = 0; 
-	if(profile != NULL){
-		known_device = profile_bloom_check(profile, event->device_hash); 
-		known_location = profile_bloom_check(profile , (uint64_t)event->geo_hash);
-	}
+    UserProfile* profile = find_or_create_profile(engine, event->user_id);
+    int known_device   = 0;
+    int known_location = 0;
+    if (profile != NULL) {
+        known_device   = profile_bloom_check(profile, event->device_hash);
+        known_location = profile_bloom_check(profile, (uint64_t)event->geo_hash);
+    }
 
-	float score = compute_login_score(event , known_device, known_location);
-	if(profile != NULL){
-		profile_update_login(profile,event);
-	}	
+    float rule_score = compute_login_score(event, known_device, known_location);
 
-	DecisionType decision; 
-	if(score < engine->config.score_threshold_mfa){
-		decision = ALLOW; 
-	}else if(score < engine->config.score_threshold_block){
-		decision = MFA_REQUIRED;
-	}else{
-		decision = BLOCK;
-	}
+    if (profile != NULL) {
+        profile_update_login(profile, event);
+    }
 
-	RiskLevel risk; 
-	if(score < 0.3f){
-		risk = LOW; 
-	}else if(score < 0.6f){
-		risk = MEDIUM;
-	}else if(score < 0.8f){
-		risk = HIGH;
-	}else{
-		risk = CRITICAL;
-	}
+    float ml_score = 0.0f;
+    if (engine->model_loaded && profile != NULL) {
+        float features[6];
+        build_feature_vector(event, profile, features);
+        ml_score = model_predict(&engine->model, features, 6);
+    }
 
-	RiskDecision result; 
-	result.decision = decision; 
-	result.risk_level = risk; 
-	result.score = score; 
-	result.rule_score = score; 
-	result.ml_score = 0.0f; 
-	result.reason_code = 0;
-	pthread_rwlock_unlock(&engine->rwlock);	
-	return result; 
+    float score = (rule_score * 0.6f) + (ml_score * 0.4f);
+    if (score > 1.0f) score = 1.0f;
+    if (score < 0.0f) score = 0.0f;
+
+    DecisionType decision;
+    if (score < engine->config.score_threshold_mfa) {
+        decision = ALLOW;
+    } else if (score < engine->config.score_threshold_block) {
+        decision = MFA_REQUIRED;
+    } else {
+        decision = BLOCK;
+    }
+
+    RiskLevel risk;
+    if (score < 0.3f)      risk = LOW;
+    else if (score < 0.6f) risk = MEDIUM;
+    else if (score < 0.8f) risk = HIGH;
+    else                   risk = CRITICAL;
+
+    RiskDecision result;
+    result.decision    = decision;
+    result.risk_level  = risk;
+    result.score       = score;
+    result.rule_score  = rule_score;
+    result.ml_score    = ml_score;
+    result.reason_code = 0;
+    pthread_rwlock_unlock(&engine->rwlock);
+    return result;
 }
