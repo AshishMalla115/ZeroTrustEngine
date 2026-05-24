@@ -1,4 +1,4 @@
-#include "risk_engine.c"
+#include "risk_engine.h"
 #include "security.h"
 #include<openssl/hmac.h>
 #include<string.h>

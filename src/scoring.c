@@ -60,3 +60,17 @@ float score_event_type(EventType type){
 		default:		return 0.1f;		
 	}
 }
+<<<<<<< HEAD
+=======
+
+void build_feature_vector(const LoginEvent* event,const UserProfile* profile,float* features) {
+	time_t t = (time_t)event->timestamp_unix;	   
+	struct tm* tm_info = localtime(&t);
+    	features[0] = (float)tm_info->tm_hour / 23.0f;
+    	features[1] = (float)event->failed_attempts / 10.0f;
+    	features[2] = (float)(event->device_hash % 1000) / 1000.0f;
+    	features[3] = (float)(event->geo_hash % 1000) / 1000.0f;
+    	features[4] = (float)(event->ip_hash % 1000) / 1000.0f;
+    	features[5] = (float)(profile->login_count) / 100.0f;
+}
+>>>>>>> main

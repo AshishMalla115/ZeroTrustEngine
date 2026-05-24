@@ -5,5 +5,5 @@
 
 float compute_login_score(const LoginEvent* event, int known_device, int known_location);
 float score_event_type(EventType type);
-
+void build_feature_vector(const LoginEvent* event,const UserProfile* profile,float* features);
 #endif

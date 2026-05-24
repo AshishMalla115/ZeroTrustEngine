@@ -1,0 +1,1 @@
+/usr/bin/cc -g -Wl,--dependency-file=CMakeFiles/test_engine.dir/link.d CMakeFiles/test_engine.dir/tests/main.c.o -o test_engine  -Wl,-rpath,/home/bot1/fypOfficalTwo/ZeroTrustEngine/build libriskscore.so /usr/lib/x86_64-linux-gnu/libcrypto.so -lm
