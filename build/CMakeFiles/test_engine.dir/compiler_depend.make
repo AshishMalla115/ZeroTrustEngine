@@ -42,6 +42,8 @@ CMakeFiles/test_engine.dir/tests/main.c.o: /home/bot1/fypOfficalTwo/ZeroTrustEng
   /usr/include/stdint.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
   /usr/include/time.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
@@ -180,8 +182,6 @@ libriskscore.so:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
@@ -196,9 +196,19 @@ libriskscore.so:
 
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
+CMakeFiles/test_engine.dir/tests/main.c.o:
+
+/usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
+
 /usr/include/openssl/types.h:
 
 /usr/include/openssl/stack.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+
+/usr/include/string.h:
 
 /usr/include/openssl/params.h:
 
@@ -229,6 +239,8 @@ libriskscore.so:
 /usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so:
 
 /usr/include/openssl/core.h:
+
+/usr/include/strings.h:
 
 /usr/include/pthread.h:
 
@@ -354,8 +366,6 @@ libriskscore.so:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
@@ -389,7 +399,3 @@ libriskscore.so:
 /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
-
-CMakeFiles/test_engine.dir/tests/main.c.o:
-
-/usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:

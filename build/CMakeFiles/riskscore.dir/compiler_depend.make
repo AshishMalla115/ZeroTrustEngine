@@ -8,6 +8,7 @@ CMakeFiles/riskscore.dir/src/model.c.o: /home/bot1/fypOfficalTwo/ZeroTrustEngine
   /usr/include/endian.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
+  /usr/include/math.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -20,8 +21,15 @@ CMakeFiles/riskscore.dir/src/model.c.o: /home/bot1/fypOfficalTwo/ZeroTrustEngine
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
+  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
@@ -436,10 +444,6 @@ CMakeFiles/riskscore.dir/src/model.c.o:
 
 /usr/include/openssl/core_dispatch.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so:
-
-/usr/include/openssl/core.h:
-
 /usr/include/openssl/bn.h:
 
 /usr/lib/x86_64-linux-gnu/libc.so:
@@ -470,11 +474,33 @@ CMakeFiles/riskscore.dir/src/security.c.o:
 
 /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 
-/usr/include/x86_64-linux-gnu/bits/time64.h:
+/usr/include/x86_64-linux-gnu/bits/cpu-set.h:
+
+/usr/include/sched.h:
+
+/usr/include/pthread.h:
+
+/home/bot1/fypOfficalTwo/ZeroTrustEngine/include/scoring.h:
+
+/usr/include/openssl/stack.h:
+
+/home/bot1/fypOfficalTwo/ZeroTrustEngine/src/risk_engine.c:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 
 /usr/lib/x86_64-linux-gnu/libc_nonshared.a:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+
+/usr/include/openssl/safestack.h:
+
+/usr/include/stdio.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/crtendS.o:
 
@@ -484,41 +510,43 @@ CMakeFiles/riskscore.dir/src/security.c.o:
 
 /usr/include/openssl/crypto.h:
 
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
-
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
 
-/usr/include/openssl/safestack.h:
+/home/bot1/fypOfficalTwo/ZeroTrustEngine/include/session.h:
 
-/usr/include/stdio.h:
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
+
+/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
+
+/usr/include/openssl/evperr.h:
+
+/usr/include/x86_64-linux-gnu/bits/endian.h:
+
+/usr/include/string.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a:
 
 /usr/include/endian.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
-
-/usr/include/x86_64-linux-gnu/bits/cpu-set.h:
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
 /usr/include/features-time64.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
 /usr/include/alloca.h:
-
-/lib/x86_64-linux-gnu/libc.so.6:
-
-/usr/include/openssl/bnerr.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
 /home/bot1/fypOfficalTwo/ZeroTrustEngine/src/session.c:
 
@@ -532,6 +560,8 @@ CMakeFiles/riskscore.dir/src/security.c.o:
 
 /home/bot1/fypOfficalTwo/ZeroTrustEngine/include/risk_engine.h:
 
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
 /usr/include/stdc-predef.h:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
@@ -539,6 +569,10 @@ CMakeFiles/riskscore.dir/src/security.c.o:
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
 
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
@@ -548,13 +582,21 @@ CMakeFiles/riskscore.dir/src/security.c.o:
 
 /lib/x86_64-linux-gnu/libmvec.so.1:
 
+/usr/include/x86_64-linux-gnu/bits/math-vector.h:
+
 /usr/include/features.h:
 
 /usr/include/time.h:
 
-/usr/include/pthread.h:
+/usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so:
 
-/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+/usr/include/openssl/core.h:
+
+/usr/include/math.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h:
+
+/usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
 /usr/include/stdint.h:
 
@@ -568,17 +610,17 @@ CMakeFiles/riskscore.dir/src/security.c.o:
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
-/usr/include/openssl/evperr.h:
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
-/usr/include/x86_64-linux-gnu/bits/endian.h:
+/usr/include/x86_64-linux-gnu/bits/time64.h:
 
-/usr/include/string.h:
+/lib/x86_64-linux-gnu/libc.so.6:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+/usr/include/openssl/bnerr.h:
 
-/usr/include/openssl/stack.h:
+/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
-/home/bot1/fypOfficalTwo/ZeroTrustEngine/src/risk_engine.c:
+/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
@@ -592,15 +634,9 @@ CMakeFiles/riskscore.dir/src/security.c.o:
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
-
-/home/bot1/fypOfficalTwo/ZeroTrustEngine/include/session.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
 
@@ -624,10 +660,6 @@ CMakeFiles/riskscore.dir/src/session.c.o:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h:
-
-/usr/include/x86_64-linux-gnu/bits/typesizes.h:
-
 /usr/include/openssl/objects.h:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
@@ -644,28 +676,20 @@ CMakeFiles/riskscore.dir/src/session.c.o:
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
-/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
-
 /home/bot1/fypOfficalTwo/ZeroTrustEngine/src/profile.c:
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
 /usr/include/x86_64-linux-gnu/bits/sched.h:
 
+/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
+
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
 
 /usr/include/x86_64-linux-gnu/sys/types.h:
 
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
+
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
-
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
-
-/home/bot1/fypOfficalTwo/ZeroTrustEngine/include/scoring.h:
-
-/usr/include/sched.h:
