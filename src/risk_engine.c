@@ -81,6 +81,57 @@ static SessionBuffer* find_or_create_session(RiskEngine* engine, uint64_t sessio
 	return NULL;
 }
 
+int re_profile_serialize(RiskEngine* engine, uint64_t user_id,
+                         uint8_t* out_buf, uint32_t buf_size,
+                         uint32_t* written) {
+    pthread_rwlock_rdlock(&engine->rwlock);
+    UserProfile* profile = find_or_create_profile(engine, user_id);
+    if(profile == NULL) {
+        pthread_rwlock_unlock(&engine->rwlock);
+        return -1;
+    }
+    int result = profile_serialize(profile, out_buf, buf_size, written);
+    pthread_rwlock_unlock(&engine->rwlock);
+    return result;
+}
+
+int re_profile_deserialize(RiskEngine* engine,
+                           const uint8_t* buf, uint32_t buf_size) {
+    pthread_rwlock_wrlock(&engine->rwlock);
+    UserProfile temp;
+    if(profile_deserialize(&temp, buf, buf_size) != 0) {
+        pthread_rwlock_unlock(&engine->rwlock);
+        return -1;
+    }
+    UserProfile* profile = find_or_create_profile(engine, temp.user_id);
+    if(profile == NULL) {
+        pthread_rwlock_unlock(&engine->rwlock);
+        return -1;
+    }
+    *profile = temp;
+    pthread_rwlock_unlock(&engine->rwlock);
+    return 0;
+}
+
+int re_engine_reload_model(RiskEngine* engine, const char* model_path) {
+    pthread_rwlock_wrlock(&engine->rwlock);
+    
+    IsolationForest new_model;
+    if(model_load(&new_model, model_path) != 0) {
+        pthread_rwlock_unlock(&engine->rwlock);
+        return -1;
+    }
+    
+    if(engine->model_loaded) {
+        model_free(&engine->model);
+    }
+    
+    engine->model = new_model;
+    engine->model_loaded = 1;
+    pthread_rwlock_unlock(&engine->rwlock);
+    return 0;
+}
+
 RiskDecision re_evaluate_event(RiskEngine* engine,const SessionEvent*event){
 	pthread_rwlock_wrlock(&engine->rwlock);
 	SessionBuffer* session = find_or_create_session(engine,event->session_id);
