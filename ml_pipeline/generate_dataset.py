@@ -352,7 +352,7 @@ def main():
     print(f"    data/attack_samples.csv")
     print(f"    data/login_events.csv")
 
-    print("\n  Column mapping to Uthkarsh's LoginEvent struct:")
+    print("\n  Column mapping to LoginEvent struct:")
     print("    user_id         → uint64_t user_id")
     print("    timestamp_unix  → int64_t  timestamp_unix")
     print("    device_hash     → uint64_t device_hash")
