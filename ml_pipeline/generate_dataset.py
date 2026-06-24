@@ -164,6 +164,7 @@ def generate_normal_samples(n: int, user_profiles: dict) -> pd.DataFrame:
             "label"          : 0,          # 0 = normal
             "attack_type"    : "none",
             "hour_of_day"    : round(hour, 4),
+            "role"           : random.choice([0, 1, 2]),
         })
 
     return pd.DataFrame(records)
@@ -226,6 +227,7 @@ def generate_attack_samples(n: int, user_profiles: dict) -> pd.DataFrame:
             "label"          : 1,
             "attack_type"    : "brute_force",
             "hour_of_day"    : round(hour, 4),
+            "role"           : random.choice([0, 1, 2]),
         })
 
     # ── 2. Account Takeover (new device + new location + off-hours) ────────
@@ -255,7 +257,7 @@ def generate_attack_samples(n: int, user_profiles: dict) -> pd.DataFrame:
         failed_attempts = int(np.random.choice([0, 1, 2], p=[0.60, 0.30, 0.10]))
 
         records.append({
-            "user_id"        : uid,
+             "user_id"        : uid,
             "timestamp_unix" : timestamp_unix,
             "device_hash"    : device_hash,
             "ip_hash"        : ip_hash,
@@ -264,6 +266,7 @@ def generate_attack_samples(n: int, user_profiles: dict) -> pd.DataFrame:
             "label"          : 1,
             "attack_type"    : "account_takeover",
             "hour_of_day"    : round(hour, 4),
+            "role"           : random.choice([0, 1, 2]),
         })
 
     # ── 3. Insider Threat (known user, odd hour, unusual IP) ──────────────
@@ -304,6 +307,7 @@ def generate_attack_samples(n: int, user_profiles: dict) -> pd.DataFrame:
             "label"          : 1,
             "attack_type"    : "insider_threat",
             "hour_of_day"    : round(hour, 4),
+            "role"           : random.choice([0, 1, 2]),
         })
 
     return pd.DataFrame(records)
@@ -352,7 +356,7 @@ def main():
     print(f"    data/attack_samples.csv")
     print(f"    data/login_events.csv")
 
-    print("\n  Column mapping to LoginEvent struct:")
+    print("\n  Column mapping toL LoginEvent struct:")
     print("    user_id         → uint64_t user_id")
     print("    timestamp_unix  → int64_t  timestamp_unix")
     print("    device_hash     → uint64_t device_hash")

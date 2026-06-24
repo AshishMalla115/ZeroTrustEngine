@@ -1,22 +1,22 @@
 {
   "n_estimators": 100,
   "contamination": 0.05,
-  "roc_auc": 0.9203,
-  "false_positive_rate": 0.0563,
-  "detection_rate": 0.634,
-  "accuracy": 0.929,
-  "precision_attack": 0.3602,
-  "recall_attack": 0.634,
-  "f1_attack": 0.4594,
+  "roc_auc": 0.9206,
+  "false_positive_rate": 0.0529,
+  "detection_rate": 0.65,
+  "accuracy": 0.933,
+  "precision_attack": 0.3806,
+  "recall_attack": 0.65,
+  "f1_attack": 0.4801,
   "thresholds": {
-    "threshold_allow": 0.1757,
-    "threshold_mfa": -0.0048,
-    "threshold_block": -0.1108
+    "threshold_allow": 0.1725,
+    "threshold_mfa": -0.0016,
+    "threshold_block": -0.1132
   },
   "confusion_matrix": {
-    "tn": 9437,
-    "fp": 563,
-    "fn": 183,
-    "tp": 317
+    "tn": 9471,
+    "fp": 529,
+    "fn": 175,
+    "tp": 325
   }
 }
