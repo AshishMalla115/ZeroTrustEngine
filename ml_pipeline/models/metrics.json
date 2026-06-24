@@ -1,22 +1,17 @@
 {
-  "n_estimators": 100,
-  "contamination": 0.05,
-  "roc_auc": 0.9206,
-  "false_positive_rate": 0.0529,
-  "detection_rate": 0.65,
-  "accuracy": 0.933,
-  "precision_attack": 0.3806,
-  "recall_attack": 0.65,
-  "f1_attack": 0.4801,
+  "roc_auc": 0.9342,
+  "false_positive_rate": 0.05,
+  "detection_rate": 0.686,
+  "accuracy": 0.9374,
+  "precision_attack": 0.4069,
+  "recall_attack": 0.686,
+  "f1_attack": 0.5108,
   "thresholds": {
-    "threshold_allow": 0.1725,
-    "threshold_mfa": -0.0016,
-    "threshold_block": -0.1132
+    "threshold_mfa": 0.0,
+    "threshold_block": -0.1141
   },
-  "confusion_matrix": {
-    "tn": 9471,
-    "fp": 529,
-    "fn": 175,
-    "tp": 325
-  }
+  "training_rows": 10000,
+  "trained_at": "2026-06-24T08:53:09.550245+00:00",
+  "n_estimators": 100,
+  "contamination": 0.05
 }
