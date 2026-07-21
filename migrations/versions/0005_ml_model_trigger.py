@@ -38,6 +38,7 @@ def upgrade():
     """)
 
     # Fire AFTER INSERT OR UPDATE so NEW.id is already assigned
+   # Fire AFTER INSERT OR UPDATE so NEW.id is already assigned
     op.execute("""
         CREATE TRIGGER trg_single_active_model
         AFTER INSERT OR UPDATE ON ml_model_versions
@@ -45,8 +46,11 @@ def upgrade():
         EXECUTE FUNCTION enforce_single_active_model();
     """)
 
-    # Give ztrust_readonly INSERT so Adnaan can add model versions
-    
+    # Give ztrust_readonly INSERT + sequence so Adnaan can register new model versions
+    op.execute("GRANT INSERT ON ml_model_versions TO ztrust_readonly")
+    op.execute("GRANT USAGE, SELECT ON SEQUENCE ml_model_versions_id_seq TO ztrust_readonly")
+
+
 
 
 def downgrade():
