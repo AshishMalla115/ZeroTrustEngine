@@ -1,0 +1,17 @@
+{
+  "roc_auc": 0.9342,
+  "false_positive_rate": 0.05,
+  "detection_rate": 0.686,
+  "accuracy": 0.9374,
+  "precision_attack": 0.4069,
+  "recall_attack": 0.686,
+  "f1_attack": 0.5108,
+  "thresholds": {
+    "threshold_mfa": 0.0,
+    "threshold_block": -0.1141
+  },
+  "training_rows": 10000,
+  "trained_at": "2026-06-24T08:53:09.550245+00:00",
+  "n_estimators": 100,
+  "contamination": 0.05
+}
