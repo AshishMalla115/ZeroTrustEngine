@@ -49,7 +49,7 @@ def upgrade():
     # Give ztrust_readonly INSERT + sequence so Adnaan can register new model versions
     op.execute("GRANT INSERT ON ml_model_versions TO ztrust_readonly")
     op.execute("GRANT USAGE, SELECT ON SEQUENCE ml_model_versions_id_seq TO ztrust_readonly")
-
+    op.execute("GRANT SELECT ON ml_model_versions TO ztrust_readonly")
 
 
 
